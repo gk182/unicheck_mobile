@@ -31,8 +31,11 @@ class LeaveStatusView extends StatelessWidget {
             Icon(Icons.inbox_outlined, color: theme.hintColor, size: 34),
             const SizedBox(height: 10),
             Text(
-              'Ban chua nop don nao.',
-              style: TextStyle(color: theme.hintColor, fontWeight: FontWeight.w600),
+              'Bạn chưa nộp đơn nào.',
+              style: TextStyle(
+                color: theme.hintColor,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ],
         ),
@@ -56,14 +59,17 @@ class LeaveStatusView extends StatelessWidget {
             color: theme.cardColor,
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: isDark ? theme.dividerColor.withOpacity(0.1) : Colors.grey.shade100,
+              color:
+                  isDark
+                      ? theme.dividerColor.withOpacity(0.1)
+                      : Colors.grey.shade100,
             ),
             boxShadow: [
               BoxShadow(
                 color: Colors.black.withOpacity(isDark ? 0.2 : 0.03),
                 blurRadius: 10,
                 offset: const Offset(0, 4),
-              )
+              ),
             ],
           ),
           child: Column(
@@ -86,7 +92,10 @@ class LeaveStatusView extends StatelessWidget {
                   ),
                   const SizedBox(width: 8),
                   Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 10,
+                      vertical: 4,
+                    ),
                     decoration: BoxDecoration(
                       color: color.withOpacity(0.15),
                       borderRadius: BorderRadius.circular(20),
@@ -94,7 +103,11 @@ class LeaveStatusView extends StatelessWidget {
                     child: Row(
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        Icon(viewModel.statusIcon(req.status), color: color, size: 14),
+                        Icon(
+                          viewModel.statusIcon(req.status),
+                          color: color,
+                          size: 14,
+                        ),
                         const SizedBox(width: 4),
                         Text(
                           statusText,
@@ -114,41 +127,48 @@ class LeaveStatusView extends StatelessWidget {
               _buildInfoRow(
                 theme,
                 Icons.calendar_today_rounded,
-                'Ngay nghi',
+                'Ngày nghỉ',
                 viewModel.formatLeaveDate(req.date),
               ),
               const SizedBox(height: 6),
               _buildInfoRow(
                 theme,
                 Icons.meeting_room_outlined,
-                'Phong',
+                'Phòng',
                 req.roomName,
               ),
               const SizedBox(height: 6),
               _buildInfoRow(
                 theme,
                 Icons.access_time_rounded,
-                'Khung gio',
+                'Khung giờ',
                 viewModel.formatTimeRange(req.startTime, req.endTime),
               ),
               const SizedBox(height: 6),
               _buildInfoRow(
                 theme,
                 Icons.schedule_rounded,
-                'Gui luc',
+                'Gửi lúc',
                 viewModel.formatCreatedAt(req.createdAt),
               ),
               const SizedBox(height: 12),
               Divider(height: 1, color: theme.dividerColor.withOpacity(0.06)),
               const SizedBox(height: 12),
               Text(
-                'Ly do:',
-                style: TextStyle(fontSize: 12, color: theme.hintColor, fontWeight: FontWeight.bold),
+                'Lý do:',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: theme.hintColor,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
               const SizedBox(height: 4),
               Text(
                 req.reason,
-                style: TextStyle(fontSize: 13, color: theme.colorScheme.onSurface.withOpacity(0.8)),
+                style: TextStyle(
+                  fontSize: 13,
+                  color: theme.colorScheme.onSurface.withOpacity(0.8),
+                ),
               ),
               if ((req.reviewNote ?? '').trim().isNotEmpty) ...[
                 const SizedBox(height: 14),
@@ -164,7 +184,7 @@ class LeaveStatusView extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        'Phan hoi giang vien',
+                        'Phản hồi giảng viên',
                         style: TextStyle(
                           fontSize: 12,
                           fontWeight: FontWeight.w700,
@@ -187,7 +207,7 @@ class LeaveStatusView extends StatelessWidget {
               if (req.reviewedAt != null) ...[
                 const SizedBox(height: 8),
                 Text(
-                  'Duyet luc: ${viewModel.formatReviewedAt(req.reviewedAt)}',
+                  'Duyệt lúc: ${viewModel.formatReviewedAt(req.reviewedAt)}',
                   style: TextStyle(fontSize: 11, color: theme.hintColor),
                 ),
               ],
@@ -196,7 +216,7 @@ class LeaveStatusView extends StatelessWidget {
                 TextButton.icon(
                   onPressed: () => viewModel.openAttachment(req.attachmentUrl!),
                   icon: const Icon(Icons.open_in_new_rounded, size: 16),
-                  label: const Text('Mo minh chung'),
+                  label: const Text('Mở minh chứng'),
                 ),
               ],
             ],
@@ -206,12 +226,20 @@ class LeaveStatusView extends StatelessWidget {
     );
   }
 
-  Widget _buildInfoRow(ThemeData theme, IconData icon, String label, String value) {
+  Widget _buildInfoRow(
+    ThemeData theme,
+    IconData icon,
+    String label,
+    String value,
+  ) {
     return Row(
       children: [
         Icon(icon, size: 14, color: theme.hintColor),
         const SizedBox(width: 6),
-        Text('$label: ', style: TextStyle(fontSize: 13, color: theme.hintColor)),
+        Text(
+          '$label: ',
+          style: TextStyle(fontSize: 13, color: theme.hintColor),
+        ),
         Expanded(
           child: Text(
             value,

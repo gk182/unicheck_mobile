@@ -32,7 +32,12 @@ class LeavePage extends StatelessWidget {
                 children: [
                   Container(
                     width: double.infinity,
-                    padding: const EdgeInsets.only(top: 60, left: 20, right: 20, bottom: 60),
+                    padding: const EdgeInsets.only(
+                      top: 60,
+                      left: 20,
+                      right: 20,
+                      bottom: 60,
+                    ),
                     decoration: const BoxDecoration(
                       color: Color(0xFF1C51E6),
                       borderRadius: BorderRadius.only(
@@ -44,7 +49,7 @@ class LeavePage extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Xin nghi phep',
+                          'Xin nghỉ phép',
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 24,
@@ -53,7 +58,7 @@ class LeavePage extends StatelessWidget {
                         ),
                         SizedBox(height: 4),
                         Text(
-                          'Gui don xin nghi hoc co ly do',
+                          'Gửi đơn xin nghỉ học có lý do',
                           style: TextStyle(color: Colors.white70, fontSize: 14),
                         ),
                       ],
@@ -70,7 +75,9 @@ class LeavePage extends StatelessWidget {
                           borderRadius: BorderRadius.circular(20),
                           boxShadow: [
                             BoxShadow(
-                              color: Colors.black.withOpacity(isDark ? 0.3 : 0.08),
+                              color: Colors.black.withOpacity(
+                                isDark ? 0.3 : 0.08,
+                              ),
                               blurRadius: 15,
                               offset: const Offset(0, 8),
                             ),
@@ -80,7 +87,8 @@ class LeavePage extends StatelessWidget {
                           children: [
                             if (controller.errorMessage != null)
                               _buildErrorBanner(context, controller),
-                            if (controller.errorMessage != null) const SizedBox(height: 14),
+                            if (controller.errorMessage != null)
+                              const SizedBox(height: 14),
                             LeaveToggle(
                               isNewRequest: controller.isNewRequestTab,
                               onToggle: controller.toggleTab,
@@ -88,15 +96,16 @@ class LeavePage extends StatelessWidget {
                             const SizedBox(height: 24),
                             AnimatedSwitcher(
                               duration: const Duration(milliseconds: 250),
-                              child: controller.isNewRequestTab
-                                  ? LeaveFormView(
-                                      key: const ValueKey('FormView'),
-                                      viewModel: controller,
-                                    )
-                                  : LeaveStatusView(
-                                      key: const ValueKey('StatusView'),
-                                      viewModel: controller,
-                                    ),
+                              child:
+                                  controller.isNewRequestTab
+                                      ? LeaveFormView(
+                                        key: const ValueKey('FormView'),
+                                        viewModel: controller,
+                                      )
+                                      : LeaveStatusView(
+                                        key: const ValueKey('StatusView'),
+                                        viewModel: controller,
+                                      ),
                             ),
                           ],
                         ),
@@ -129,7 +138,10 @@ class LeavePage extends StatelessWidget {
           Expanded(
             child: Text(
               controller.errorMessage ?? 'Khong tai duoc du lieu',
-              style: TextStyle(color: theme.colorScheme.error, fontWeight: FontWeight.w600),
+              style: TextStyle(
+                color: theme.colorScheme.error,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
           TextButton(

@@ -17,7 +17,10 @@ class SubjectStatsView extends StatelessWidget {
         color: theme.cardColor,
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
-          BoxShadow(color: Colors.black.withOpacity(isDark ? 0.2 : 0.02), blurRadius: 10)
+          BoxShadow(
+            color: Colors.black.withOpacity(isDark ? 0.2 : 0.02),
+            blurRadius: 10,
+          ),
         ],
       ),
       child: Column(
@@ -25,14 +28,20 @@ class SubjectStatsView extends StatelessWidget {
         children: [
           Row(
             children: [
-              Icon(Icons.bar_chart_rounded, color: theme.colorScheme.primary, size: 22),
+              Icon(
+                Icons.bar_chart_rounded,
+                color: theme.colorScheme.primary,
+                size: 22,
+              ),
               const SizedBox(width: 8),
-              Text('Thong ke theo mon',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: theme.colorScheme.onSurface,
-                  )),
+              Text(
+                'Thống kê theo môn',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: theme.colorScheme.onSurface,
+                ),
+              ),
             ],
           ),
           const SizedBox(height: 20),
@@ -40,14 +49,16 @@ class SubjectStatsView extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 6),
               child: Text(
-                'Khong co du lieu thong ke trong thang nay.',
+                'Không có dữ liệu thống kê trong tháng này.',
                 style: TextStyle(color: theme.hintColor),
               ),
             )
           else
             ...stats.map((stat) {
               final Color progressColor =
-                  stat.percentage < 0.7 ? const Color(0xFFEF4444) : theme.colorScheme.primary;
+                  stat.percentage < 0.7
+                      ? const Color(0xFFEF4444)
+                      : theme.colorScheme.primary;
 
               return Padding(
                 padding: const EdgeInsets.only(bottom: 20.0),
@@ -67,8 +78,13 @@ class SubjectStatsView extends StatelessWidget {
                             overflow: TextOverflow.ellipsis,
                           ),
                         ),
-                        Text('${(stat.percentage * 100).toInt()}%',
-                            style: TextStyle(color: progressColor, fontWeight: FontWeight.bold)),
+                        Text(
+                          '${(stat.percentage * 100).toInt()}%',
+                          style: TextStyle(
+                            color: progressColor,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                       ],
                     ),
                     const SizedBox(height: 10),
@@ -79,29 +95,40 @@ class SubjectStatsView extends StatelessWidget {
                             borderRadius: BorderRadius.circular(10),
                             child: LinearProgressIndicator(
                               value: stat.percentage,
-                              backgroundColor: isDark
-                                  ? theme.colorScheme.surfaceVariant.withOpacity(0.3)
-                                  : Colors.grey.shade200,
-                              valueColor: AlwaysStoppedAnimation<Color>(progressColor),
+                              backgroundColor:
+                                  isDark
+                                      ? theme.colorScheme.surfaceVariant
+                                          .withOpacity(0.3)
+                                      : Colors.grey.shade200,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                progressColor,
+                              ),
                               minHeight: 8,
                             ),
                           ),
                         ),
                         const SizedBox(width: 12),
-                        Text('${stat.attended}/${stat.total}',
-                            style: TextStyle(
-                                color: theme.colorScheme.onSurface.withOpacity(0.55),
-                                fontSize: 12,
-                                fontWeight: FontWeight.w600)),
+                        Text(
+                          '${stat.attended}/${stat.total}',
+                          style: TextStyle(
+                            color: theme.colorScheme.onSurface.withOpacity(
+                              0.55,
+                            ),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
                       ],
                     ),
                     const SizedBox(height: 6),
                     Align(
                       alignment: Alignment.centerRight,
                       child: Text(
-                        'Vang: ${stat.absent}',
+                        'Vắng: ${stat.absent}',
                         style: TextStyle(
-                            color: theme.colorScheme.onSurface.withOpacity(0.6), fontSize: 11),
+                          color: theme.colorScheme.onSurface.withOpacity(0.6),
+                          fontSize: 11,
+                        ),
                       ),
                     ),
                   ],

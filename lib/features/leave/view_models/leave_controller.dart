@@ -116,13 +116,13 @@ class LeaveController extends GetxController {
 
     final schedule = selectedSchedule;
     if (schedule == null) {
-      _showError('Vui long chon buoi hoc can xin nghi.');
+      _showError('Vui lòng chọn buổi học cần xin nghỉ.');
       return;
     }
 
     final reason = reasonController.text.trim();
     if (reason.isEmpty) {
-      _showError('Vui long nhap ly do xin nghi.');
+      _showError('Vui lòng nhập lý do xin nghỉ.');
       return;
     }
 
@@ -137,8 +137,8 @@ class LeaveController extends GetxController {
       );
 
       Get.snackbar(
-        'Thanh cong',
-        'Da gui don xin nghi.',
+        'Thành công',
+        'Đã gửi đơn xin nghỉ.',
         snackPosition: SnackPosition.BOTTOM,
       );
 
@@ -171,8 +171,8 @@ class LeaveController extends GetxController {
       attachmentUrl = result['attachmentUrl']?.toString();
       attachmentName = result['originalFileName']?.toString() ?? file.name;
       Get.snackbar(
-        'Tai len thanh cong',
-        attachmentName ?? 'Da tai minh chung',
+        'Thành công',
+        attachmentName ?? 'Đã tải minh chứng',
         snackPosition: SnackPosition.BOTTOM,
       );
     } catch (e) {
@@ -193,16 +193,17 @@ class LeaveController extends GetxController {
   Future<void> openAttachment(String url) async {
     final uri = Uri.tryParse(url);
     if (uri == null) {
-      _showError('Minh chung khong hop le.');
+      _showError('Minh chứng không hợp lệ.');
       return;
     }
     final opened = await launchUrl(uri, mode: LaunchMode.externalApplication);
     if (!opened) {
-      _showError('Khong mo duoc minh chung.');
+      _showError('Không mở được minh chứng.');
     }
   }
 
-  String formatLeaveDate(DateTime value) => DateFormat('dd/MM/yyyy').format(value);
+  String formatLeaveDate(DateTime value) =>
+      DateFormat('dd/MM/yyyy').format(value);
 
   String formatTimeRange(String startTime, String endTime) {
     final start = _normalizeTime(startTime);
@@ -213,25 +214,25 @@ class LeaveController extends GetxController {
   String formatScheduleTime(TimeOfDay time) => _formatTime(time);
 
   String formatReviewedAt(DateTime? value) {
-    if (value == null) return 'Chua duyet';
+    if (value == null) return 'Chưa duyệt';
     return DateFormat('dd/MM/yyyy HH:mm').format(value.toLocal());
   }
 
   String formatCreatedAt(DateTime? value) {
-    if (value == null) return 'Khong ro';
+    if (value == null) return 'Không rõ';
     return DateFormat('dd/MM/yyyy HH:mm').format(value.toLocal());
   }
 
   String formatStatus(String raw) {
     switch (raw.toUpperCase()) {
       case 'APPROVED':
-        return 'Chap nhan';
+        return 'Chấp nhận';
       case 'PENDING':
-        return 'Dang duyet';
+        return 'Đang duyệt';
       case 'REJECTED':
-        return 'Tu choi';
+        return 'Từ chối';
       default:
-        return 'Khong xac dinh';
+        return 'Không xác định';
     }
   }
 
@@ -299,27 +300,27 @@ class LeaveController extends GetxController {
   String _messageForCode(String? code, {required String fallback}) {
     switch (code) {
       case 'UNAUTHORIZED':
-        return 'Phien dang nhap da het han. Vui long dang nhap lai.';
+        return 'Phiên đăng nhập đã hết hạn. Vui lòng đăng nhập lại.';
       case 'LEAVE_REASON_REQUIRED':
-        return 'Vui long nhap ly do xin nghi.';
+        return 'Vui lòng nhập lý do xin nghỉ.';
       case 'LEAVE_REASON_TOO_SHORT':
-        return 'Ly do xin nghi qua ngan.';
+        return 'Lý do xin nghỉ quá ngắn.';
       case 'SCHEDULE_NOT_FOUND':
-        return 'Buoi hoc khong ton tai.';
+        return 'Buổi học không tồn tại.';
       case 'STUDENT_NOT_ENROLLED_FOR_SCHEDULE':
-        return 'Ban khong thuoc danh sach lop cua buoi hoc nay.';
+        return 'Bạn không thuộc danh sách lớp của buổi học này.';
       case 'LEAVE_DEADLINE_PASSED':
-        return 'Buoi hoc da dien ra, khong the nop don.';
+        return 'Buổi học đã diễn ra, không thể nộp đơn.';
       case 'LEAVE_SUBMISSION_WINDOW_CLOSED':
-        return 'Da qua han nop don cho buoi hoc nay.';
+        return 'Đã quá hạn nộp đơn cho buổi học này.';
       case 'LEAVE_ALREADY_SUBMITTED':
-        return 'Ban da nop don cho buoi hoc nay roi.';
+        return 'Bạn đã nộp đơn cho buổi học này rồi.';
       case 'LEAVE_ATTACHMENT_REQUIRED':
-        return 'Buoi hoc nay yeu cau tai len minh chung.';
+        return 'Buổi học này yêu cầu tải lên minh chứng.';
       case 'LEAVE_ATTACHMENT_TOO_LARGE':
-        return 'Minh chung vuot qua dung luong cho phep.';
+        return 'Minh chứng vượt quá dung lượng cho phép.';
       case 'LEAVE_ATTACHMENT_INVALID_TYPE':
-        return 'Dinh dang minh chung khong hop le.';
+        return 'Định dạng minh chứng không hợp lệ.';
       default:
         return fallback;
     }

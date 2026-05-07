@@ -7,7 +7,12 @@ class SummaryCards extends StatelessWidget {
   const SummaryCards({Key? key, required this.stats}) : super(key: key);
 
   Widget _buildCard(
-      BuildContext context, String value, String label, Color color, IconData icon) {
+    BuildContext context,
+    String value,
+    String label,
+    Color color,
+    IconData icon,
+  ) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
@@ -18,28 +23,39 @@ class SummaryCards extends StatelessWidget {
         borderRadius: BorderRadius.circular(16),
         boxShadow: [
           BoxShadow(
-              color: Colors.black.withOpacity(isDark ? 0.2 : 0.05),
-              blurRadius: 10,
-              offset: const Offset(0, 4))
+            color: Colors.black.withOpacity(isDark ? 0.2 : 0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 4),
+          ),
         ],
       ),
       child: Column(
         children: [
           Container(
             padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(color: color.withOpacity(0.15), shape: BoxShape.circle),
+            decoration: BoxDecoration(
+              color: color.withOpacity(0.15),
+              shape: BoxShape.circle,
+            ),
             child: Icon(icon, color: color, size: 20),
           ),
           const SizedBox(height: 12),
-          Text(value,
-              style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: theme.colorScheme.onSurface)),
+          Text(
+            value,
+            style: TextStyle(
+              fontSize: 22,
+              fontWeight: FontWeight.bold,
+              color: theme.colorScheme.onSurface,
+            ),
+          ),
           const SizedBox(height: 4),
-          Text(label,
-              style: TextStyle(
-                  fontSize: 12, color: theme.colorScheme.onSurface.withOpacity(0.6))),
+          Text(
+            label,
+            style: TextStyle(
+              fontSize: 12,
+              color: theme.colorScheme.onSurface.withOpacity(0.6),
+            ),
+          ),
         ],
       ),
     );
@@ -59,23 +75,43 @@ class SummaryCards extends StatelessWidget {
       children: [
         SizedBox(
           width: cardWidth,
-          child: _buildCard(context, '$present', 'Co mat', const Color(0xFF10B981),
-              Icons.check_circle_outline),
+          child: _buildCard(
+            context,
+            '$present',
+            'Có mặt',
+            const Color(0xFF10B981),
+            Icons.check_circle_outline,
+          ),
         ),
         SizedBox(
           width: cardWidth,
-          child:
-              _buildCard(context, '$absent', 'Vang', const Color(0xFFEF4444), Icons.cancel_outlined),
+          child: _buildCard(
+            context,
+            '$absent',
+            'Vắng',
+            const Color(0xFFEF4444),
+            Icons.cancel_outlined,
+          ),
         ),
         SizedBox(
           width: cardWidth,
-          child:
-              _buildCard(context, '$late', 'Di muon', const Color(0xFFF59E0B), Icons.schedule),
+          child: _buildCard(
+            context,
+            '$late',
+            'Đi muộn',
+            const Color(0xFFF59E0B),
+            Icons.schedule,
+          ),
         ),
         SizedBox(
           width: cardWidth,
-          child: _buildCard(context, '$excused', 'Co phep', const Color(0xFF6366F1),
-              Icons.event_available_outlined),
+          child: _buildCard(
+            context,
+            '$excused',
+            'Có phép',
+            const Color(0xFF6366F1),
+            Icons.event_available_outlined,
+          ),
         ),
       ],
     );

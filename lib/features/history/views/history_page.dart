@@ -38,7 +38,8 @@ class HistoryPage extends StatelessWidget {
                         children: [
                           SummaryCards(stats: controller.stats),
                           const SizedBox(height: 16),
-                          if (controller.errorMessage != null) _buildErrorBanner(context, controller),
+                          if (controller.errorMessage != null)
+                            _buildErrorBanner(context, controller),
                           const SizedBox(height: 12),
                           _buildSearchAndMonth(context, controller),
                           const SizedBox(height: 16),
@@ -81,12 +82,16 @@ class HistoryPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Lich su & Thong ke',
-            style: TextStyle(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
+            'Lịch sử & Thống kê',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+            ),
           ),
           SizedBox(height: 4),
           Text(
-            'Theo doi tinh trang chuyen can',
+            'Theo dõi tình trạng chuyên cần',
             style: TextStyle(color: Colors.white70, fontSize: 14),
           ),
         ],
@@ -94,7 +99,10 @@ class HistoryPage extends StatelessWidget {
     );
   }
 
-  Widget _buildSearchAndMonth(BuildContext context, HistoryController controller) {
+  Widget _buildSearchAndMonth(
+    BuildContext context,
+    HistoryController controller,
+  ) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
 
@@ -110,7 +118,7 @@ class HistoryPage extends StatelessWidget {
                 BoxShadow(
                   color: Colors.black.withOpacity(isDark ? 0.2 : 0.05),
                   blurRadius: 10,
-                )
+                ),
               ],
             ),
             child: TextField(
@@ -118,7 +126,7 @@ class HistoryPage extends StatelessWidget {
               style: TextStyle(color: theme.colorScheme.onSurface),
               decoration: InputDecoration(
                 icon: Icon(Icons.search, color: theme.hintColor),
-                hintText: 'Tim mon hoc, phong, trang thai...',
+                hintText: 'Tìm môn học, phòng, trạng thái...',
                 hintStyle: TextStyle(color: theme.hintColor),
                 border: InputBorder.none,
               ),
@@ -145,20 +153,28 @@ class HistoryPage extends StatelessWidget {
                 BoxShadow(
                   color: Colors.black.withOpacity(isDark ? 0.2 : 0.05),
                   blurRadius: 10,
-                )
+                ),
               ],
             ),
             child: Row(
               children: [
-                Text(controller.selectedMonthLabel,
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold, color: theme.colorScheme.onSurface)),
+                Text(
+                  controller.selectedMonthLabel,
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: theme.colorScheme.onSurface,
+                  ),
+                ),
                 const SizedBox(width: 4),
-                Icon(Icons.keyboard_arrow_down, size: 20, color: theme.colorScheme.primary),
+                Icon(
+                  Icons.keyboard_arrow_down,
+                  size: 20,
+                  color: theme.colorScheme.primary,
+                ),
               ],
             ),
           ),
-        )
+        ),
       ],
     );
   }
@@ -172,18 +188,18 @@ class HistoryPage extends StatelessWidget {
     final maxYear = 2035;
     final years = List<int>.generate(maxYear - minYear + 1, (i) => minYear + i);
     final monthLabels = const <String>[
-      'Thang 1',
-      'Thang 2',
-      'Thang 3',
-      'Thang 4',
-      'Thang 5',
-      'Thang 6',
-      'Thang 7',
-      'Thang 8',
-      'Thang 9',
-      'Thang 10',
-      'Thang 11',
-      'Thang 12',
+      'Tháng 1',
+      'Tháng 2',
+      'Tháng 3',
+      'Tháng 4',
+      'Tháng 5',
+      'Tháng 6',
+      'Tháng 7',
+      'Tháng 8',
+      'Tháng 9',
+      'Tháng 10',
+      'Tháng 11',
+      'Tháng 12',
     ];
 
     return showModalBottomSheet<DateTime>(
@@ -211,7 +227,7 @@ class HistoryPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Chon thang / nam',
+                    'Chọn tháng / năm',
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
@@ -225,7 +241,7 @@ class HistoryPage extends StatelessWidget {
                         child: DropdownButtonFormField<int>(
                           value: selectedMonth,
                           decoration: const InputDecoration(
-                            labelText: 'Thang',
+                            labelText: 'Tháng',
                             border: OutlineInputBorder(),
                           ),
                           items: List<DropdownMenuItem<int>>.generate(
@@ -248,15 +264,18 @@ class HistoryPage extends StatelessWidget {
                         child: DropdownButtonFormField<int>(
                           value: selectedYear,
                           decoration: const InputDecoration(
-                            labelText: 'Nam',
+                            labelText: 'Năm',
                             border: OutlineInputBorder(),
                           ),
-                          items: years
-                              .map((year) => DropdownMenuItem<int>(
-                                    value: year,
-                                    child: Text('$year'),
-                                  ))
-                              .toList(),
+                          items:
+                              years
+                                  .map(
+                                    (year) => DropdownMenuItem<int>(
+                                      value: year,
+                                      child: Text('$year'),
+                                    ),
+                                  )
+                                  .toList(),
                           onChanged: (value) {
                             if (value == null) return;
                             setState(() {
@@ -271,22 +290,24 @@ class HistoryPage extends StatelessWidget {
                   Row(
                     children: [
                       TextButton(
-                        onPressed: () => Navigator.of(ctx).pop(
-                          DateTime(now.year, now.month),
-                        ),
-                        child: const Text('Thang hien tai'),
+                        onPressed:
+                            () => Navigator.of(
+                              ctx,
+                            ).pop(DateTime(now.year, now.month)),
+                        child: const Text('Tháng hiện tại'),
                       ),
                       const Spacer(),
                       TextButton(
                         onPressed: () => Navigator.of(ctx).pop(),
-                        child: const Text('Huy'),
+                        child: const Text('Hủy'),
                       ),
                       const SizedBox(width: 8),
                       FilledButton(
-                        onPressed: () => Navigator.of(ctx).pop(
-                          DateTime(selectedYear, selectedMonth),
-                        ),
-                        child: const Text('Ap dung'),
+                        onPressed:
+                            () => Navigator.of(
+                              ctx,
+                            ).pop(DateTime(selectedYear, selectedMonth)),
+                        child: const Text('Áp dụng'),
                       ),
                     ],
                   ),
@@ -314,14 +335,17 @@ class HistoryPage extends StatelessWidget {
           const SizedBox(width: 8),
           Expanded(
             child: Text(
-              controller.errorMessage ?? 'Khong tai duoc du lieu',
-              style: TextStyle(color: theme.colorScheme.error, fontWeight: FontWeight.w600),
+              controller.errorMessage ?? 'Không tải được dữ liệu',
+              style: TextStyle(
+                color: theme.colorScheme.error,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           ),
           const SizedBox(width: 8),
           TextButton(
             onPressed: controller.refreshData,
-            child: const Text('Thu lai'),
+            child: const Text('Thử lại'),
           ),
         ],
       ),
